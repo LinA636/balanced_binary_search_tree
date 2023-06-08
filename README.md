@@ -20,9 +20,10 @@ We will implement a Tree class, wich accepts an array when initialized and has a
 
 #delete
   accepts a value, searches the value in the tree and removes it.
+  arranges the children of the deleted value, so that the tree stays ordered.
 
 #find
-  acceots a vaule and returns the node with the given value
+  accepts a vaule and returns the node with the given value
 
 #level_order
   accepts a block. traverses the tree in breadth-first level order and yield each node to the provided block. returns an array of values if no block is given.

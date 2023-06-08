@@ -16,3 +16,6 @@ tree.insert(66)
 tree.pretty_print()
 
 puts tree.find(30)
+
+value = 67
+puts "height of #{value}: #{tree.height(tree.find(value))}"

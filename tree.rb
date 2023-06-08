@@ -86,6 +86,18 @@ class Tree
     end
   end
 
+  def height(node = self.root)
+    if node == nil
+      0
+    elsif node.left_child == nil && node.right_child == nil
+      1
+    else
+      height_left_subtree = 1 + height(node.left_child)
+      height_rigth_subtree = 1 + height(node.right_child)
+      height_left_subtree < height_rigth_subtree ? height_rigth_subtree : height_left_subtree
+    end
+  end
+
   private
   def build_tree(array)
     if array.length == 0
@@ -104,7 +116,7 @@ class Tree
         build_tree(array[half_length+1..-1]))
     end
   end
-  
+
   def add_to_subtree(current_node, node_to_add)
     if node_to_add == nil
       nil

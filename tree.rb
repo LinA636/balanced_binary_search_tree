@@ -4,7 +4,6 @@ class Tree
   attr_accessor :root
   
   def initialize(array)
-    p array.uniq.sort
     @root = build_tree(array.uniq.sort)
     pretty_print()
   end
@@ -19,15 +18,41 @@ class Tree
   def insert(node = self.root, value)
     if node == nil
       node = Node.new(value)
-    elsif self.root < value
-      insert(self.root.left_child, value)
-    elsif self.root > value
-      insert(self.root.right_child, value)
+    elsif node > value
+      if node.left_child == nil
+        node.left_child = insert(node.left_child, value)
+      else
+        insert(node.left_child, value)
+      end
+    elsif node < value
+      if node.right_child == nil
+        node.right_child = insert(node.right_child, value)
+      else
+        insert(node.right_child, value)
+      end
     end
   end
 
   private
   def build_tree(array)
+    if array.length == 0
+      nil
+    elsif array.length == 1
+      Node.new(array[0])
+    elsif array.length == 2
+      Node.new(
+        array[1], 
+        Node.new(array[0]))      
+    else
+      half_length = array.length/2
+      Node.new(
+        array[half_length],
+        build_subtree(array[0..half_length-1]),
+        build_subtree(array[half_length+1..-1]))
+    end
+  end
+
+  def build_subtree(array)
     if array.length == 0
       nil
     elsif array.length == 1

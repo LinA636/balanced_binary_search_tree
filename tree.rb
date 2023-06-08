@@ -34,8 +34,6 @@ class Tree
   end
 
   def delete(node = self.root, value)
-    # TODO
-    # tree should still be sorted after deletion
     if node == nil
       nil
     # delete a child
@@ -76,21 +74,15 @@ class Tree
     end
   end
 
-  def add_to_subtree(current_node, node_to_add)
-    if node_to_add == nil
-      nil
-    elsif current_node < node_to_add.value
-      if current_node.right_child == nil
-        current_node.right_child = node_to_add
-      else
-        add_to_subtree(current_node.right_child, node_to_add)
-      end
+  def find(node = self.root, value)
+    if node == nil
+      "this node does not exist"
+    elsif node == value
+      node
+    elsif node < value
+      find(node.right_child, value)
     else
-      if current_node.left_child == nil
-        current_node.left_child = node_to_add
-      else
-        add_to_subtree(current_node.left_child, node_to_add)
-      end
+      find(node.left_child, value)
     end
   end
 
@@ -108,26 +100,26 @@ class Tree
       half_length = array.length/2
       Node.new(
         array[half_length],
-        build_subtree(array[0..half_length-1]),
-        build_subtree(array[half_length+1..-1]))
-    end
-  end
-
-  def build_subtree(array)
-    if array.length == 0
-      nil
-    elsif array.length == 1
-      Node.new(array[0])
-    elsif array.length == 2
-      Node.new(
-        array[1], 
-        Node.new(array[0]))      
-    else
-      half_length = array.length/2
-      Node.new(
-        array[half_length],
         build_tree(array[0..half_length-1]),
         build_tree(array[half_length+1..-1]))
+    end
+  end
+  
+  def add_to_subtree(current_node, node_to_add)
+    if node_to_add == nil
+      nil
+    elsif current_node < node_to_add.value
+      if current_node.right_child == nil
+        current_node.right_child = node_to_add
+      else
+        add_to_subtree(current_node.right_child, node_to_add)
+      end
+    else
+      if current_node.left_child == nil
+        current_node.left_child = node_to_add
+      else
+        add_to_subtree(current_node.left_child, node_to_add)
+      end
     end
   end
 

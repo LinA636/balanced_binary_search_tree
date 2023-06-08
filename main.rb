@@ -15,15 +15,4 @@ tree.insert(64)
 tree.insert(66)
 tree.pretty_print()
 
-puts "\n"
-
-array2 = [1, 2, 3, 4, 5, 6, 7]
-tree2 = Tree.new(array2)
-tree2.delete(2)
-tree2.pretty_print
-tree2.delete(3)
-tree2.pretty_print
-tree2.delete(5)
-tree2.pretty_print
-tree2.delete(6)
-tree2.pretty_print
+puts tree.find(30)

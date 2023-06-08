@@ -10,7 +10,11 @@ class Node
   end
 
   def <=>(value)
-    self.value <=> value
+    if Node === value
+      self.value <=> value.value
+    else
+      self.value <=> value
+    end
   end
 
   def to_s

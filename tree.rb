@@ -132,7 +132,7 @@ class Tree
   def add_to_subtree(current_node, node_to_add)
     if node_to_add == nil
       nil
-    elsif current_node < node_to_add.value
+    elsif current_node < node_to_add
       if current_node.right_child == nil
         current_node.right_child = node_to_add
       else

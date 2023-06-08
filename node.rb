@@ -7,7 +7,6 @@ class Node
     @value = value
     @left_child = left_child
     @right_child = right_child
-    #puts_children()
   end
 
   def <=>(value)
@@ -15,7 +14,7 @@ class Node
   end
 
   def to_s
-    puts "Node with value: #{self.value}, left: #{self.left_child.nil? ? 'nil' : self.left_child} , right: #{self.right_child.nil? ? 'nil' : self.right_child}"
+    "Node with value: #{self.value}, left: #{self.left_child.nil? ? 'nil' : self.left_child.value} , right: #{self.right_child.nil? ? 'nil' : self.right_child.value}"
   end
 
 end

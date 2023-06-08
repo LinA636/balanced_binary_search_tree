@@ -33,6 +33,67 @@ class Tree
     end
   end
 
+  def delete(node = self.root, value)
+    # TODO
+    # tree should still be sorted after deletion
+    if node == nil
+      nil
+    # delete a child
+    elsif node > value
+      if node.left_child == value
+        node.left_child = delete_child(node.left_child)
+      elsif
+        delete(node.left_child, value)
+      end
+    elsif node < value
+      if node.right_child == value
+        node.right_child = delete_child(node.right_child)
+      else
+        delete(node.right_child, value)
+      end
+    else
+      # delete root
+      add_to_subtree(node.right_child, node.left_child.right_child)
+      self.root = node.left_child
+      self.root.right_child = node.right_child
+    end      
+  end
+
+  def delete_child(node)
+    if node.left_child == nil && node.right_child == nil
+      # delete leafe (child without children)
+      nil
+    elsif node == nil
+      # delete child with only right_child
+      node.right_child
+    elsif node.right_child == nil
+      # delete chilt with only left_chil
+      node.left_child
+    else
+      # delete child with two children
+      add_to_subtree(node.right_child, node.left_child)
+      node.right_child
+    end
+  end
+
+  def add_to_subtree(current_node, node_to_add)
+    if node_to_add == nil
+      nil
+    elsif current_node < node_to_add.value
+      if current_node.right_child == nil
+        current_node.right_child = node_to_add
+      else
+        add_to_subtree(current_node.right_child, node_to_add)
+      end
+    else
+      if current_node.left_child == nil
+        current_node.left_child = node_to_add
+      else
+        add_to_subtree(current_node.left_child, node_to_add)
+      end
+    end
+  end
+
   private
   def build_tree(array)
     if array.length == 0

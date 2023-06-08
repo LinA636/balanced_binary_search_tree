@@ -98,6 +98,18 @@ class Tree
     end
   end
 
+  def depth(current_node = self.root, node)
+    if current_node == node
+      1
+    elsif current_node < node
+      1 + depth(current_node.right_child, node)
+    elsif current_node > node 
+      1 + depth(current_node.left_child, node)
+    else
+      0
+    end
+  end
+
   private
   def build_tree(array)
     if array.length == 0

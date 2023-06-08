@@ -17,5 +17,6 @@ tree.pretty_print()
 
 puts tree.find(30)
 
-value = 67
+value = 66
 puts "height of #{value}: #{tree.height(tree.find(value))}"
+puts "depths of #{value}: #{tree.depth(tree.find(value))}"

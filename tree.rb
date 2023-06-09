@@ -2,7 +2,7 @@ require_relative 'node.rb'
 
 class Tree
   attr_accessor :root
-  @level_order_array
+  attr :level_order_array
   
   def initialize(array)
     @root = build_tree(array.uniq.sort)
@@ -114,20 +114,10 @@ class Tree
 
   def level_order(&block)
     if block_given?
-      if self.root == nil
-        self.level_order_array
-      else
-        num_of_levels = height()
-        current_node = self.root
-        for i in 0..num_of_levels
-          self.level_order_array = block.call(current_node)
-
-        end
-      end
+      
     else
-
+      
     end
-    self.level_order_array
   end
 
 
@@ -137,7 +127,7 @@ class Tree
   end
 
   def level_order_array=(arr)
-    @level_order_array += arr
+    @level_order_array = self.level_order_array + arr
   end
 
   def build_tree(array)

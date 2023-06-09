@@ -4,9 +4,7 @@ require_relative 'node.rb'
 
 array = (Array.new(15) { rand(1..100) })
 array = [1,4,23,67,43, 75,23,65,34, 65]
-#array = [1, 2, 3]
 tree = Tree.new(array)
-# root does not take the actual root but the smallest one
 
 tree.insert(30)
 tree.insert(77)
@@ -20,3 +18,7 @@ puts tree.find(30)
 value = 66
 puts "height of #{value}: #{tree.height(tree.find(value))}"
 puts "depths of #{value}: #{tree.depth(tree.find(value))}"
+
+array2 = [10, 20, 30, 100, 150, 200, 300]
+tree2 = Tree.new(array2)
+#puts tree2.level_order

@@ -12,22 +12,17 @@ tree.insert(35)
 tree.insert(64)
 tree.insert(66)
 tree.pretty_print()
+puts tree.balanced?
 
-puts tree.find(30)
+tree.delete(67)
+puts tree.balanced?
+tree.delete(75)
+tree.pretty_print()
 
-value = 66
-puts "height of #{value}: #{tree.height(tree.find(value))}"
-puts "depths of #{value}: #{tree.depth(tree.find(value))}"
+puts tree.balanced?
 
-array2 = [10, 20, 30, 100, 150, 200, 300]
-tree2 = Tree.new(array2)
-#puts tree2.level_order
-#puts tree2.inorder
-# puts 
-#puts tree2.preorder
-#puts
-#puts tree2.postorder
-puts "height: #{tree2.height}"
-
-puts "level_order\n"
-puts tree2.level_order
+tree2 = Tree.new([2,3, 4, 5])
+puts tree2.balanced?
+tree2.insert(1)
+tree2.pretty_print()
+puts tree2.balanced?

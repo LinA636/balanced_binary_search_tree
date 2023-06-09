@@ -89,6 +89,7 @@ class Tree
   end
 
   def height(node = self.root)
+    # returns numb of edges from node to furthest away leafe
     if node == nil 
       0
     elsif node.left_child == nil && node.right_child == nil
@@ -101,6 +102,7 @@ class Tree
   end
 
   def depth(current_node = self.root, node)
+    # returns numb of edges from root to node
     if current_node == node
       1
     elsif current_node < node
@@ -186,25 +188,21 @@ class Tree
     self.order_array
   end
 
-  def save_level(node, level_no, &block)
-    if block_given?
-      if level_no == 0
-        self.order_array << block.call(node)
-      else
-        save_level(node.left_child, level_no-1, &block) if node.left_child
-        save_level(node.right_child, level_no-1, &block) if node.right_child
-      end
+  def balanced?(node = self.root)
+    if node == nil
+      true
     else
-      if level_no == 0
-        self.order_array << node
+      if node.left_child == nil && node.right_child == nil
+        true        
+      elsif height(node) > 1 && (node.left_child == nil || node.right_child == nil)
+        false       
       else
-        save_level(node.left_child, level_no-1) if node.left_child
-        save_level(node.right_child, level_no-1) if node.right_child
+        balanced?(node.left_child) && balanced?(node.right_child)
       end
     end
   end
 
-
+# PRIVATE METHODS
   private
   def order_array
     @order_array
@@ -250,5 +248,22 @@ class Tree
     end
   end
 
+  def save_level(node, level_no, &block)
+    if block_given?
+      if level_no == 0
+        self.order_array << block.call(node)
+      else
+        save_level(node.left_child, level_no-1, &block) if node.left_child
+        save_level(node.right_child, level_no-1, &block) if node.right_child
+      end
+    else
+      if level_no == 0
+        self.order_array << node
+      else
+        save_level(node.left_child, level_no-1) if node.left_child
+        save_level(node.right_child, level_no-1) if node.right_child
+      end
+    end
+  end
 
 end

@@ -42,7 +42,7 @@ class Tree
     elsif node > value
       if node.left_child == value
         node.left_child = delete_child(node.left_child)
-      elsif
+      else
         delete(node.left_child, value)
       end
     elsif node < value
@@ -60,7 +60,7 @@ class Tree
   end
 
   def delete_child(node)
-    if node.left_child == nil && node.right_child == nil
+    return nil if node.left_child == nil && node.right_child == nil
       # delete leafe (child without children)
       nil
     elsif node == nil
@@ -90,9 +90,7 @@ class Tree
 
   def height(node = self.root)
     # returns numb of edges from node to furthest away leafe
-    if node == nil 
-      0
-    elsif node.left_child == nil && node.right_child == nil
+    if node == nil || (node.left_child == nil && node.right_child == nil)
       0
     else
       height_left_subtree = 1 + height(node.left_child)
@@ -166,21 +164,14 @@ class Tree
     if node == self.root && !self.order_array.empty?
       self.order_array = []
     end
-    if block_given?
-      if node == nil
-        self.order_array
-      else
-        num_of_levels = height()
-        for i in 0 .. num_of_levels
-          save_level(self.root, i, &block)
-        end
-      end
+    if node == nil
+      self.order_array
     else
-      if node == nil
-        self.order_array
-      else
-        num_of_levels = height()
-        for i in 0 .. num_of_levels
+      num_of_levels = height()
+      for i in 0 .. num_of_levels
+        if block_given?
+          save_level(self.root, i, &block)
+        else
           save_level(self.root, i)
         end
       end

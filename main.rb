@@ -26,3 +26,5 @@ puts tree2.balanced?
 tree2.insert(1)
 tree2.pretty_print()
 puts tree2.balanced?
+tree2.rebalance
+tree2.pretty_print()

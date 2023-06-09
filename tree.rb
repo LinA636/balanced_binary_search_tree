@@ -120,7 +120,7 @@ class Tree
     end
     if block_given?
         inorder(node.left_child, &block) if node.left_child
-        self.order_array << node if node
+        self.order_array << block.call(node) if node
         inorder(node.right_child, &block) if node.right_child
     else
         inorder(node.left_child) if node.left_child
@@ -135,7 +135,7 @@ class Tree
       self.order_array = []
     end
     if block_given?
-      self.order_array << node if node
+      self.order_array << block.call(node) if node
       preorder(node.left_child, &block) if node.left_child
       preorder(node.right_child, &block) if node.right_child
     else
@@ -153,7 +153,7 @@ class Tree
     if block_given?
       postorder(node.left_child, &block) if node.left_child
       postorder(node.right_child, &block) if node.right_child
-      self.order_array << node if node
+      self.order_array << block.call(node) if node
     else
       postorder(node.left_child) if node.left_child
       postorder(node.right_child) if node.right_child
@@ -199,6 +199,12 @@ class Tree
       else
         balanced?(node.left_child) && balanced?(node.right_child)
       end
+    end
+  end
+
+  def rebalance
+    unless balanced?
+      self.root = build_tree(inorder{|node| node.value})
     end
   end
 

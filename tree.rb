@@ -2,11 +2,11 @@ require_relative 'node.rb'
 
 class Tree
   attr_accessor :root
-  attr :level_order_array
+  attr :order_array
   
   def initialize(array)
     @root = build_tree(array.uniq.sort)
-    @level_order_array = []
+    @order_array = []
     pretty_print()
   end
 
@@ -112,6 +112,54 @@ class Tree
     end
   end
 
+  def inorder(node = self.root, &block)
+    if node == self.root && !self.order_array.empty?
+      self.order_array = []
+    end
+    if block_given?
+        inorder(node.left_child, &block) if node.left_child
+        self.order_array << node if node
+        inorder(node.right_child, &block) if node.right_child
+    else
+        inorder(node.left_child) if node.left_child
+        self.order_array << node if node
+        inorder(node.right_child) if node.right_child
+    end
+    self.order_array
+  end
+
+  def preorder(node = self.root, &block)
+    if node == self.root && !self.order_array.empty?
+      self.order_array = []
+    end
+    if block_given?
+      self.order_array << node if node
+      preorder(node.left_child, &block) if node.left_child
+      preorder(node.right_child, &block) if node.right_child
+    else
+      self.order_array << node if node
+      preorder(node.left_child) if node.left_child
+      preorder(node.right_child) if node.right_child
+    end
+    self.order_array
+  end
+
+  def postorder(node = self.root, &block)
+    if node == self.root && !self.order_array.empty?
+      self.order_array = []
+    end
+    if block_given?
+      postorder(node.left_child, &block) if node.left_child
+      postorder(node.right_child, &block) if node.right_child
+      self.order_array << node if node
+    else
+      postorder(node.left_child) if node.left_child
+      postorder(node.right_child) if node.right_child
+      self.order_array << node if node
+    end
+    self.order_array
+  end
+
   def level_order(&block)
     if block_given?
       
@@ -122,12 +170,12 @@ class Tree
 
 
   private
-  def level_order_array
-    @level_order_array
+  def order_array
+    @order_array
   end
 
-  def level_order_array=(arr)
-    @level_order_array = self.level_order_array + arr
+  def order_array=(arr)
+    @order_array = arr
   end
 
   def build_tree(array)

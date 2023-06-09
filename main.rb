@@ -22,8 +22,12 @@ puts "depths of #{value}: #{tree.depth(tree.find(value))}"
 array2 = [10, 20, 30, 100, 150, 200, 300]
 tree2 = Tree.new(array2)
 #puts tree2.level_order
-puts tree2.inorder
-puts ''
-puts tree2.preorder
-puts
-puts tree2.postorder
+#puts tree2.inorder
+# puts 
+#puts tree2.preorder
+#puts
+#puts tree2.postorder
+puts "height: #{tree2.height}"
+
+puts "level_order\n"
+puts tree2.level_order

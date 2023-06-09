@@ -160,11 +160,47 @@ class Tree
     self.order_array
   end
 
-  def level_order(&block)
+  def level_order(node = self.root, &block)
+    if node == self.root && !self.order_array.empty?
+      self.order_array = []
+    end
     if block_given?
-      
+      if node == nil
+        self.order_array
+      else
+        num_of_levels = height()
+        for i in 0 .. num_of_levels
+          save_level(self.root, i, &block)
+        end
+      end
     else
-      
+      if node == nil
+        self.order_array
+      else
+        num_of_levels = height()
+        for i in 0 .. num_of_levels
+          save_level(self.root, i)
+        end
+      end
+    end
+    self.order_array
+  end
+
+  def save_level(node, level_no, &block)
+    if block_given?
+      if level_no == 0
+        self.order_array << block.call(node)
+      else
+        save_level(node.left_child, level_no-1, &block) if node.left_child
+        save_level(node.right_child, level_no-1, &block) if node.right_child
+      end
+    else
+      if level_no == 0
+        self.order_array << node
+      else
+        save_level(node.left_child, level_no-1) if node.left_child
+        save_level(node.right_child, level_no-1) if node.right_child
+      end
     end
   end
 

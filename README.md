@@ -1,4 +1,6 @@
 # balanced_binary_search_tree
+The Odin Project lesson: https://www.theodinproject.com/lessons/ruby-binary-search-trees
+
 implementation of a BST - balanced binary search tree
 
 # classes
